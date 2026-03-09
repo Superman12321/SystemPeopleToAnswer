@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RandomSystemPeopleToAnswer.RandomStudent">
+
+    <Shell.TitleView>
+        <Grid class="titlebar">
+            <Label Text="Wylosuj nr w dzienniku"
+               class="titletext"/>
+        </Grid>
+    </Shell.TitleView>
+
+    <VerticalStackLayout>
+        
+        <Label x:Name="luckyNumberLabel"
+           FontSize="22"
+           TextColor="Gold"
+           HorizontalOptions="Center"
+           Margin="0,10,0,10"/>
+
+        <Label x:Name="randomNumberText"
+           Text=""
+           FontSize="20"
+           HorizontalOptions="Center"
+           TextColor="White" />
+
+
+        <Picker x:Name="classPicker"
+                Title="Choose class"
+        />
+        <Button Text="Losuj studenta" Clicked="randomStudent" class="button_"/>
+    </VerticalStackLayout>
+</ContentPage>

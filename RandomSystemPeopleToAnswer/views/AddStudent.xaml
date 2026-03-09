@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RandomSystemPeopleToAnswer.AddStudent">
+
+    <Shell.TitleView>
+        <Grid class="titlebar">
+            <Label Text="Dodaj ucznia do listy"
+               class="titletext"/>
+        </Grid>
+    </Shell.TitleView>
+
+    <VerticalStackLayout>
+        
+        <Label Text="Imię ucznia" class="label"/>
+        <Editor x:Name="firstNameStudent" class="name_editor"/>
+
+        <Label Text="Nazwisko ucznia" class="label"/>
+        <Editor x:Name="lastNameStudent" class="lastName_editor"/>
+
+        <Label Text="Numer w dzienniku ucznia" class="label"/>
+        <Editor x:Name="numberStudentList" class="numberStudentList_editor"/>
+
+        <Label Text="Nazwa klasy" class="label"/>
+        <Editor x:Name="nameClass" class="nameClass_editor"/>
+
+        <Button Text="Dodaj studenta" Clicked="addStudent" class="button_"/>
+    </VerticalStackLayout>
+</ContentPage>

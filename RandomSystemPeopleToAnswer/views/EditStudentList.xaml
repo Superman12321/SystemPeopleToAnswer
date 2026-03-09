@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RandomSystemPeopleToAnswer.EditStudentList">
+
+    <Shell.TitleView>
+        <Grid class="titlebar">
+            <Label Text="Edytuj studenta"
+               class="titletext"/>
+        </Grid>
+    </Shell.TitleView>
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <Label Text="Wybierz klasę:" />
+            <Picker x:Name="classPicker" SelectedIndexChanged="OnClassSelected" />
+        
+            <Label Text="Wybierz ucznia:" />
+            <Picker x:Name="studentPicker" SelectedIndexChanged="OnStudentSelected" />
+        
+            <Label Text="Imię:" />
+            <Entry x:Name="firstNameEntry" />
+        
+            <Label Text="Nazwisko:" />
+            <Entry x:Name="lastNameEntry" />
+        
+            <Label Text="Numer w dzienniku:" />
+            <Entry x:Name="numberEntry" />
+
+            <Button Text="Zapisz zmiany" Clicked="SaveChanges" class="button_"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,66 @@
+﻿^contentpage {
+    background-color: #0B3D2E;
+    title-color: #F2C14E;
+}
+
+grid.titlebar {
+    background-color: #3EB489;
+    padding-left: 10;
+    padding-right: 10;
+    font-size:25;
+}
+
+label.titletext {
+    font-weight: bold;
+    color: #0B3D2E;
+    text-align: center;
+}
+
+entry, editor {
+    background-color: #FFFFFF;
+    color: #000000;
+    border-color: #F2C14E;
+    border-width: 2;
+    border-radius: 6;
+    padding: 8;
+    font-size: 16;
+    margin-bottom: 14;
+    margin-top: 4;
+}
+
+picker {
+    background-color: #FFFFFF;
+    color: #000000;
+    border-color: #F2C14E;
+    border-width: 2;
+    border-radius: 6;
+    padding: 8;
+    font-size: 16;
+    margin-bottom: 14;
+    margin-top: 4;
+}
+
+.button_, .between_button {
+    background-color: #F2C14E;
+    color: #0B3D2E;
+    font-size: 18;
+    padding: 10;
+    border-radius: 8;
+    margin-top: 12;
+    margin-bottom: 8;
+}
+
+.between_button{
+    text-align:center;
+    margin-left:100;
+    width:400;
+}
+
+verticalstacklayout {
+    padding: 18;
+    spacing: 12;
+}
+
+horizontalstacklayout {
+    spacing: 10;
+}

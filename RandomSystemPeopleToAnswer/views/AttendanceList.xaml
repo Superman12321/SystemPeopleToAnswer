@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RandomSystemPeopleToAnswer.AttendanceList">
+
+    <Shell.TitleView>
+        <Grid class="titlebar">
+            <Label Text="AttendanceList"
+               class="titletext"/>
+        </Grid>
+    </Shell.TitleView>
+
+    <VerticalStackLayout>
+
+        <Picker x:Name="classPicker" Title="Wybierz klasę" />
+
+        <CollectionView x:Name="attendanceList">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <HorizontalStackLayout>
+
+                        <Label Text="{Binding FullName}" />
+                        <Label Text="--" />
+                        <Label Text="{Binding NumberStudent}" />
+
+                        <HorizontalStackLayout Spacing="5">
+                            <CheckBox IsChecked="{Binding IsPresent}" />
+                            <Label Text="Obecny" />
+                        </HorizontalStackLayout>
+
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <HorizontalStackLayout>
+            <Button Text="Wczytaj listę" Clicked="LoadAttendance" class="between_button"/>
+            <Button Text="Zapisz obecność" Clicked="SaveAttendance" class="between_button"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
