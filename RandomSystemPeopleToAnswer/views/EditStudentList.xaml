@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RandomSystemPeopleToAnswer.EditStudentList">
-
-    <Shell.TitleView>
-        <Grid class="titlebar">
-            <Label Text="Edytuj studenta"
-               class="titletext"/>
-        </Grid>
-    </Shell.TitleView>
-
+             x:Class="RandomSystemPeopleToAnswer.EditStudentList"
+             Title="Edytuj studenta">
+    
     <ScrollView>
         <VerticalStackLayout>
             <Label Text="Wybierz klasę:" />

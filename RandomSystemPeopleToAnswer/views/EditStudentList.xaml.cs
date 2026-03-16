@@ -9,7 +9,7 @@ public partial class EditStudentList : ContentPage
     public EditStudentList()
     {
         InitializeComponent();
-        LoadStudents(); 
+        LoadStudents();
         LoadClasses();
     }
 
@@ -34,7 +34,7 @@ public partial class EditStudentList : ContentPage
                 s.NumberClass = parts[0];
                 s.FirstName = parts[1];
                 s.LastName = parts[2];
-                s.NumberStudent = parts[3];
+                s.NumberStudent = int.TryParse(parts[3], out int num) ? num : 0;
 
                 allStudents.Add(s);
             }
@@ -58,8 +58,6 @@ public partial class EditStudentList : ContentPage
 
     void OnClassSelected(object sender, EventArgs e)
     {
-        LoadStudents();
-
         studentPicker.ItemsSource = null;
 
         if (classPicker.SelectedItem == null)
@@ -97,7 +95,7 @@ public partial class EditStudentList : ContentPage
             {
                 firstNameEntry.Text = s.FirstName;
                 lastNameEntry.Text = s.LastName;
-                numberEntry.Text = s.NumberStudent;
+                numberEntry.Text = s.NumberStudent.ToString();
                 break;
             }
         }
@@ -110,7 +108,12 @@ public partial class EditStudentList : ContentPage
 
         string selectedClass = classPicker.SelectedItem.ToString();
         string selectedName = studentPicker.SelectedItem.ToString();
-        string newNumber = numberEntry.Text;
+
+        if (!int.TryParse(numberEntry.Text, out int newNumber))
+        {
+            DisplayAlert("B³¹d", "Numer ucznia musi byæ liczb¹!", "OK");
+            return;
+        }
 
         foreach (Student s in allStudents)
         {
@@ -135,7 +138,7 @@ public partial class EditStudentList : ContentPage
             {
                 s.FirstName = firstNameEntry.Text;
                 s.LastName = lastNameEntry.Text;
-                s.NumberStudent = numberEntry.Text;
+                s.NumberStudent = newNumber;
                 break;
             }
         }

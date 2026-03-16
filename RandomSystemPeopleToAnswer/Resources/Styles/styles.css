@@ -3,17 +3,11 @@
     title-color: #F2C14E;
 }
 
-grid.titlebar {
-    background-color: #3EB489;
-    padding-left: 10;
-    padding-right: 10;
-    font-size:25;
-}
-
-label.titletext {
-    font-weight: bold;
-    color: #0B3D2E;
-    text-align: center;
+.appShell {
+    -maui-shell-tabbar-title: #FFFFFF;
+    -maui-shell-tabbar-background: #1D4D2E;
+    -maui-shell-background: #0B3D2E;
+    -maui-shell-title: #FFFFFF;
 }
 
 entry, editor {

@@ -32,11 +32,10 @@ public static class LuckyNumberService
     }
 }
 
-
 public partial class RandomStudent : ContentPage
 {
     private int _lucky;
-    Queue<string> lastThree = new Queue<string>();
+    Queue<int> lastThree = new Queue<int>();
 
     public RandomStudent()
     {
@@ -47,22 +46,30 @@ public partial class RandomStudent : ContentPage
         _lucky = LuckyNumberService.GenerateLuckyNumber(1, 40);
         luckyNumberLabel.Text = "Szczêœliwy numerek: " + _lucky;
     }
+
     List<Student> LoadStudents()
     {
         string path = Path.Combine(FileSystem.AppDataDirectory, "baza_szkoly.txt");
-
         var list = new List<Student>();
+
+        if (!File.Exists(path))
+            return list;
 
         foreach (var line in File.ReadAllLines(path))
         {
             var parts = line.Split(';');
-            list.Add(new Student
-            {
-                NumberClass = parts[0],
-                FirstName = parts[1],
-                LastName = parts[2],
-                NumberStudent = parts[3]
-            });
+
+            Student s = new Student();
+            s.NumberClass = parts[0];
+            s.FirstName = parts[1];
+            s.LastName = parts[2];
+
+            if (int.TryParse(parts[3], out int num))
+                s.NumberStudent = num;
+            else
+                s.NumberStudent = 0;
+
+            list.Add(s);
         }
 
         return list;
@@ -84,23 +91,29 @@ public partial class RandomStudent : ContentPage
         classPicker.ItemsSource = classes;
     }
 
-    Dictionary<string, bool> LoadAttendance(string selectedClass)
+    Dictionary<int, bool> LoadAttendance(string selectedClass)
     {
-        Dictionary<string, bool> present = new Dictionary<string, bool>();
+        Dictionary<int, bool> present = new Dictionary<int, bool>();
 
         string file = Path.Combine(FileSystem.AppDataDirectory, $"attendance_{selectedClass}.txt");
 
-        if (File.Exists(file))
+        if (!File.Exists(file))
+            return present;
+
+        foreach (var line in File.ReadAllLines(file))
         {
-            foreach (var line in File.ReadAllLines(file))
+            var p = line.Split(';');
+
+            if (int.TryParse(p[0], out int num))
             {
-                var p = line.Split(';');
-                present[p[0]] = bool.Parse(p[1]);
+                bool value = bool.Parse(p[1]);
+                present[num] = value;
             }
         }
 
         return present;
     }
+
     void LoadQueue()
     {
         string file = Path.Combine(FileSystem.AppDataDirectory, "cooldown.txt");
@@ -110,33 +123,26 @@ public partial class RandomStudent : ContentPage
 
         foreach (var line in File.ReadAllLines(file))
         {
-            lastThree.Enqueue(line);
+            if (int.TryParse(line, out int num))
+                lastThree.Enqueue(num);
         }
     }
+
     void SaveQueue()
     {
         string file = Path.Combine(FileSystem.AppDataDirectory, "cooldown.txt");
-        File.WriteAllLines(file, lastThree);
+        File.WriteAllLines(file, lastThree.Select(x => x.ToString()));
     }
+
     private void randomStudent(object sender, EventArgs e)
     {
-        string selectedClass = "";
-
-        if (classPicker.SelectedItem != null)
-        {
-            selectedClass = classPicker.SelectedItem.ToString();
-        }
-        else
+        if (classPicker.SelectedItem == null)
         {
             randomNumberText.Text = "Wybierz klasê!";
             return;
         }
 
-        if (string.IsNullOrWhiteSpace(selectedClass))
-        {
-            randomNumberText.Text = "Wybierz klasê!";
-            return;
-        }
+        string selectedClass = classPicker.SelectedItem.ToString();
 
         List<Student> allStudents = LoadStudents();
         List<Student> classStudents = new List<Student>();
@@ -155,24 +161,25 @@ public partial class RandomStudent : ContentPage
             return;
         }
 
-        Dictionary<string, bool> present = LoadAttendance(selectedClass);
+        Dictionary<int, bool> present = LoadAttendance(selectedClass);
 
         List<Student> presentStudents = new List<Student>();
 
         foreach (var s in classStudents)
         {
+            bool isPresent = true;
+
             if (present.ContainsKey(s.NumberStudent))
             {
-                if (present[s.NumberStudent] == true)
-                {
-                    if (!lastThree.Contains(s.NumberStudent))
-                        presentStudents.Add(s);
-                }
+                isPresent = present[s.NumberStudent];
             }
-            else
+
+            if (isPresent)
             {
                 if (!lastThree.Contains(s.NumberStudent))
+                {
                     presentStudents.Add(s);
+                }
             }
         }
 
@@ -190,9 +197,10 @@ public partial class RandomStudent : ContentPage
             int index = random.Next(presentStudents.Count);
             chosen = presentStudents[index];
         }
-        while (int.Parse(chosen.NumberStudent) == _lucky);
+        while (chosen.NumberStudent == _lucky);
 
-        randomNumberText.Text = chosen.FirstName + " " + chosen.LastName + " (nr " + chosen.NumberStudent + ")";
+        randomNumberText.Text =
+            $"{chosen.FirstName} {chosen.LastName} (nr {chosen.NumberStudent})";
 
         lastThree.Enqueue(chosen.NumberStudent);
 

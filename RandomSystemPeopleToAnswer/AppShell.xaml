@@ -5,14 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:RandomSystemPeopleToAnswer"
     Shell.FlyoutBehavior="Disabled"
-    Title="RandomSystemPeopleToAnswer">
+    Title="RandomSystemPeopleToAnswer"
+    StyleClass="appShell">
 
-    <TabBar
-        Shell.TabBarBackgroundColor="#0B2D2E"
-        Shell.TabBarForegroundColor="#F2C14E"
-        Shell.TabBarTitleColor="#F2C14E"
-        Shell.TabBarUnselectedColor="#FFFFFF">
-        
+    <TabBar>
         <ShellContent
             Title="Dodawanie uczniów do listy"
             ContentTemplate="{DataTemplate local:AddStudent}"

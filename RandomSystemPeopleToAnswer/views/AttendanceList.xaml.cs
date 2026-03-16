@@ -9,6 +9,7 @@ public partial class AttendanceList : ContentPage
         InitializeComponent();
         LoadClasses();
     }
+
     void LoadClasses()
     {
         var students = LoadStudents();
@@ -30,15 +31,19 @@ public partial class AttendanceList : ContentPage
         string path = Path.Combine(FileSystem.AppDataDirectory, "baza_szkoly.txt");
         var list = new List<Student>();
 
+        if (!File.Exists(path))
+            return list;
+
         foreach (var line in File.ReadAllLines(path))
         {
             var p = line.Split(';');
+
             list.Add(new Student
             {
                 NumberClass = p[0],
                 FirstName = p[1],
                 LastName = p[2],
-                NumberStudent = p[3]
+                NumberStudent = int.TryParse(p[3], out int num) ? num : 0
             });
         }
 
@@ -65,14 +70,16 @@ public partial class AttendanceList : ContentPage
 
         string file = Path.Combine(FileSystem.AppDataDirectory, $"attendance_{selectedClass}.txt");
 
-        Dictionary<string, bool> present = new Dictionary<string, bool>();
+        Dictionary<int, bool> present = new Dictionary<int, bool>();
 
         if (File.Exists(file))
         {
             foreach (var line in File.ReadAllLines(file))
             {
                 var p = line.Split(';');
-                present[p[0]] = bool.Parse(p[1]);
+
+                if (int.TryParse(p[0], out int num))
+                    present[num] = bool.Parse(p[1]);
             }
         }
 
@@ -121,4 +128,3 @@ public partial class AttendanceList : ContentPage
         await DisplayAlert("Sukces", "Obecnoœæ zosta³a zapisana.", "OK");
     }
 }
-

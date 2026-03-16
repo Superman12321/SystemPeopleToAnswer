@@ -63,10 +63,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="views\AddStudent.xaml.cs">
+	  <Compile Update="Views\AddStudent.xaml.cs">
 	    <DependentUpon>AddStudent.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="views\EditStudentList.xaml.cs">
+	  <Compile Update="Views\EditStudentList.xaml.cs">
 	    <DependentUpon>EditStudentList.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
@@ -75,22 +75,22 @@
 	  <MauiXaml Update="AddStudent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="views\AttendanceList.xaml">
+	  <MauiXaml Update="Views\AttendanceList.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="EditStudentList.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="views\AddStudent.xaml">
+	  <MauiXaml Update="Views\AddStudent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="views\EditStudentList.xaml">
+	  <MauiXaml Update="Views\EditStudentList.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="views\StudentList.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="views\RandomStudent.xaml">
+	  <MauiXaml Update="Views\RandomStudent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
